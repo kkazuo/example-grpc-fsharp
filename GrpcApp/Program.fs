@@ -49,7 +49,6 @@ let configureEndpoints (route : IEndpointRouteBuilder) =
 open Serilog
 open Serilog.Events
 open Serilog.Exceptions
-open Serilog.Extensions.Logging
 
 let configureApp (app : IApplicationBuilder) =
     let env = app.ApplicationServices.GetService<IWebHostEnvironment>()
@@ -68,8 +67,6 @@ let configureServices (services : IServiceCollection) =
     services.AddCors()    |> ignore
     services.AddGiraffe() |> ignore
     services.AddGrpc()    |> ignore
-    use loggerProvider = new SerilogLoggerProvider()
-    services.AddSingleton(loggerProvider.CreateLogger("Program")) |> ignore
 
 let configureLogging (logging : ILoggingBuilder) =
     logging

@@ -5,7 +5,7 @@ open Microsoft.Extensions.Logging
 open Grpc.Core
 open GrpcSvc
 
-type GreeterService (loggor : ILogger) =
+type GreeterService (loggor : ILogger<GreeterService>) =
     inherit Greeter.GreeterBase ()
     override __.SayHello(request: HelloRequest, context: ServerCallContext) = task {
         loggor.LogDebug("Name={@0}", request)
