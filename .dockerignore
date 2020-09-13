@@ -1,0 +1,6 @@
+.git
+.gitignore
+**/.ionide
+**/.vscode
+**/bin
+**/obj
