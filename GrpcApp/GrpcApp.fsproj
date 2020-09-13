@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <AssemblyName>GrpcApp.App</AssemblyName>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GrpcSvc\GrpcSvc.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GreeterService.fs" />
+    <Compile Include="Program.fs" />
+    <None Include="web.config" />
+    <Content Include="WebRoot/**/*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Giraffe" Version="5.0.0-alpha-003" />
+    <PackageReference Include="TaskBuilder.fs" Version="2.1.*" />
+    <PackageReference Include="Serilog" Version="2.10.*" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.4.*" />
+    <PackageReference Include="Serilog.Exceptions" Version="5.6.*" />
+  </ItemGroup>
+</Project>
