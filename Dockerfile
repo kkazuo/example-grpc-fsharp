@@ -4,13 +4,13 @@ WORKDIR /app
 
 # copy everything else and build
 COPY . ./
-RUN dotnet publish -c Release -o out -r linux-x64
+RUN dotnet publish -c Release -o out -r linux-x64 --self-contained=false /p:PublishSingleFile=false || true
 
 # build runtime image
-FROM debian:10-slim
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
 ENV TZ Asia/Tokyo
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT 1
 
 WORKDIR /app
-COPY --from=build-env /app/out ./
+COPY --from=build-env /app/out/ /app/
 CMD ["/app/GrpcApp.App"]
