@@ -1,3 +1,5 @@
-.ionide
+**/.idea
+**/.ionide
+**/.vscode
 bin
 obj
