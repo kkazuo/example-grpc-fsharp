@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GrpcSvc\GrpcSvc.csproj" />
+    <ProjectReference Include="../GrpcSvc/GrpcSvc.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GreeterService.fs" />
