@@ -103,9 +103,24 @@ let configureWebHost (webHost : IWebHostBuilder) =
         .ConfigureLogging(Action<ILoggingBuilder> configureLogging)
     |> ignore
 
+let runClient () =
+    use channel = Grpc.Net.Client.GrpcChannel.ForAddress "http://localhost:5000"
+    let client = GrpcSvc.Greeter.GreeterClient channel
+
+    while true do
+        let req = GrpcSvc.HelloRequest()
+        req.Name <- "test"
+        let res = client.SayHello(req)
+        printfn "%s" res.Message
+        ()
+
 [<EntryPoint>]
 let main args =
     configureSerilog()
+
+    if args.Length > 0 then
+        runClient() //|> Async.AwaitTask |> Async.RunSynchronously
+
     try
         Host.CreateDefaultBuilder(args)
             .UseSerilog()
