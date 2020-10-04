@@ -5,10 +5,11 @@ open Microsoft.Extensions.Logging
 open Grpc.Core
 open GrpcSvc
 
-type GreeterService (loggor : ILogger<GreeterService>) =
+type GreeterService (logger : ILogger<GreeterService>) =
     inherit Greeter.GreeterBase ()
     override __.SayHello(request: HelloRequest, context: ServerCallContext) = task {
-        loggor.LogDebug("Name={@0}", request)
+        logger.LogDebug("ident {@0}", context.AuthContext.PeerIdentity)
+        logger.LogDebug("Name={@0}", request)
         let r = HelloReply()
         r.Message <- sprintf "hello %A" request.Name
         return r
